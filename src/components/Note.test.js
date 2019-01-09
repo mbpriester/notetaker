@@ -13,7 +13,7 @@ describe("Note", function () {
     it("contains a textfield", () => {
         let props = {
             note: 'blah',
-            key: 1
+            indexKey: 1
         }
 
         const wrapper = shallow(<Note {...props} />)

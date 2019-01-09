@@ -6,6 +6,8 @@ describe("app", function () {
 
         cy.contains('Create a New Note')
         cy.get('.addNoteButton').click()
-        cy.contains('.noteListContainer')
+        cy.get('.newNoteContainer')
+        cy.get('.noteText input').type('Hello')
+
     });
 });
