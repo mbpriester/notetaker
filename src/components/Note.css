@@ -1,0 +1,8 @@
+.deleteNote {
+
+}
+.noteText input {
+    background-color: transparent;
+    height: 25px;
+    font-size: 18px;
+}
