@@ -1,8 +1,27 @@
-.deleteNote {
-
+.deleteNote input{
+    height: 25px;
+    border: 1px solid white;
+    background-color: transparent;
+}
+.noteText {
+    flex-grow: 1;
 }
 .noteText input {
     background-color: transparent;
     height: 25px;
     font-size: 18px;
+    border-bottom: 1px solid white;
+    color: white;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    width: 100%;
+}
+
+.noteItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
 }
