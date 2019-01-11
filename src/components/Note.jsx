@@ -1,26 +1,36 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import {Checkbox, Input} from "semantic-ui-react";
+import {Input} from "semantic-ui-react";
 import './Note.css'
+import {FiTrash2} from "react-icons/fi";
 
-const Note = (note, indexKey, onSubmit) => {
-    console.log(onSubmit)
+const Note = ({note, index, onSubmit, onDelete}) => {
     return (
-        <div key={indexKey} className='noteItem'>
-            {note && <Checkbox className='deleteNote' />}
+        <div key={index} className='noteItem'>
+            {note ? <Input
+                className='noteText newNoteItem'
+                placeholder='Enter Note here'
+                disabled={!!note}
+                value={note}
+                onKeyDown={(e) => e.key === 'Enter' && onSubmit && onSubmit(e.target.value)}
+            /> :
             <Input
                 className='noteText'
                 placeholder='Enter Note here'
-                value={note}
-                onKeyPress={(e) => e.key === 'Enter' && onSubmit && onSubmit(e.target.value)}
-            />
+                onKeyDown={(e) => e.key === 'Enter' && onSubmit && onSubmit(e.target.value)}
+            />}
+            {note && <FiTrash2
+                className='deleteNote'
+                onClick={onDelete && onDelete()}
+            />}
         </div>
     )
 }
 
 Note.propTypes = {
     note: PropTypes.string,
-    indexKey: PropTypes.number
+    indexKey: PropTypes.number,
+    onSubmit: PropTypes.func
 }
 
 export default Note

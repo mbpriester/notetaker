@@ -1,9 +1,7 @@
-.deleteNote input{
+.deleteNote {
     height: 25px;
-    border: 1px solid white;
-    background-color: transparent;
 }
-.noteText {
+.noteText, .existing {
     flex-grow: 1;
 }
 .noteText input {

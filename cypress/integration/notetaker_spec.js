@@ -2,12 +2,15 @@ describe("app", function () {
     it('should load the app', function () {
         cy.visit('http://localhost:3000')
 
-        cy.contains('My Note List')
+        cy.contains('Note Taker')
 
         cy.contains('Create a New Note')
         cy.get('.addNoteButton').click()
-        cy.get('.newNoteContainer')
-        cy.get('.noteText input').type('Hello')
-
+        cy.get('.newNoteContainer .noteText input').type('Hello')
+        cy.get('.newNoteContainer .noteText input').should('have.value', 'Hello')
+        cy.get('.newNoteContainer .noteText input').type('{enter}')
+        cy.get('.allNotesContainer .noteText input').should('have.value', 'Hello')
+        cy.get('.allNotesContainer .deleteNote').click()
+        cy.get('.allNotesContainer .noteText input').should('not.have.value', 'Hello')
     });
 });

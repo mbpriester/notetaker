@@ -1,12 +1,12 @@
 import React from 'react'
 import Note from "./Note";
+import {connect} from "react-redux";
 import {Button} from "semantic-ui-react";
 import {FiPlus} from "react-icons/fi";
+import {addNote, deleteNote} from "../actions";
 import './NoteList.css';
-import {connect} from "react-redux";
-import {addNote} from "../actions";
 
-class NoteList extends React.Component {
+export class NoteList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,10 +14,7 @@ class NoteList extends React.Component {
         }
         this.addNewNote = this.addNewNote.bind(this)
         this.onSubmit = this.onSubmit.bind(this)
-    }
-
-    componentDidUpdate() {
-        console.log("isHidden has updated: " + this.state.isHidden)
+        this.onDelete = this.onDelete.bind(this)
     }
 
     addNewNote() {
@@ -29,30 +26,40 @@ class NoteList extends React.Component {
     }
 
     onSubmit(newNote) {
-        console.log('i submitted somethjng: ', newNote)
         this.props.addNote(newNote)
+    }
+
+    onDelete(index) {
+        this.props.deleteNote(index)
     }
 
     render() {
         const {notes} = this.props
-        console.log(notes)
         const {isHidden} = this.state
         return (
             <div>
-                <h2>Create a New Note</h2>
+                <h2 className='newNoteTitle'>Create a New Note</h2>
                 <Button
                     className='addNoteButton'
                     onClick={() => this.addNewNote()}>
                     <FiPlus/>
                 </Button>
                 <div className='newNoteContainer'>
-                    {!isHidden && <Note onSubmit={(newNote) => this.onSubmit(newNote)}/>}
+                    {!isHidden &&
+                    <Note
+                        onSubmit={this.onSubmit}
+                        className={'newNoteItem'}/>}
                 </div>
                 <div className='allNotesContainer'>
-                    {notes.length > 0 &&
+                    <h2>Existing Notes</h2>
+                    {notes && notes.length > 0 &&
                     (notes.map((note, index) =>
-                        <Note note={note} key={index}
-                              onSubmit={(newNote) => this.onSubmit(newNote)}/>))}
+                        <Note
+                            key={index}
+                            note={note}
+                            className={'existingNoteItem'}
+                            onDelete={this.onDelete(index)}
+                        />))}
                 </div>
             </div>
         )
@@ -64,7 +71,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    addNote: note => dispatch(addNote(note))
+    addNote: note => dispatch(addNote(note)),
+    deleteNote: index => dispatch(deleteNote(index))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NoteList)
