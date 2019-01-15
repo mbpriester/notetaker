@@ -8,7 +8,7 @@ describe("Note", function () {
     it('should create a blank note',  () => {
         const wrapper = shallow(<Note />)
 
-        expect(wrapper.find('.noteItem')).toExist()
+        expect(wrapper.find('.newNoteItem')).toExist()
     });
 
     it("contains a textfield", () => {
@@ -20,12 +20,16 @@ describe("Note", function () {
         const wrapper = shallow(<Note {...props} />)
 
         expect(wrapper.children().containsMatchingElement(<Input />)).toEqual(true)
-        expect(wrapper.children().containsMatchingElement(<Checkbox />)).toEqual(true)
     });
-    it('should clear the textfield after entering text', function () {
-        const wrapper = shallow(<Note />)
+    it('should clear the textfield after entering text', () => {
+        let props = {
+            note: null,
+            onSubmit: jest.fn()
+        }
+        const wrapper = shallow(<Note {...props} />)
+        const inputField = wrapper.find('.newNoteItem input')
+        inputField.simulate('change', {target: { value: 'Howdy'}})
 
-        wrapper.find('.newNoteItem input').simulate('keydown', {target: {value: 'Howdy'}})
         wrapper.find('.newNoteItem input').simulate('keydown', {key: 'Enter'})
         expect(wrapper.find('.newNoteItem input').val()).toEqual('')
     });

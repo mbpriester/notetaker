@@ -1,9 +1,13 @@
-export const addNote = (note) => ({
+export const addNote = (note) => {
+return    {
     type: 'NEW_NOTE',
     note: note
-})
+}}
 
-export const deleteNote = (index) => ({
-    type: 'DELETE_NOTE',
-    index: index
-})
+
+export const deleteNote = (index) => {
+    return {
+        type: 'DELETE_NOTE',
+        index: index
+    }
+}

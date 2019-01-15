@@ -10,6 +10,7 @@ describe("app", function () {
         cy.get('.newNoteContainer .noteText input').should('have.value', 'Hello')
         cy.get('.newNoteContainer .noteText input').type('{enter}')
         cy.get('.allNotesContainer .noteText input').should('have.value', 'Hello')
+        cy.get('.newNoteContainer .noteText input').should('have.value', '')
         cy.get('.allNotesContainer .deleteNote').click()
         cy.get('.allNotesContainer .noteText input').should('not.have.value', 'Hello')
     });

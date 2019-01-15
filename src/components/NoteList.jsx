@@ -57,8 +57,9 @@ export class NoteList extends React.Component {
                         <Note
                             key={index}
                             note={note}
+                            index={index}
                             className={'existingNoteItem'}
-                            onDelete={this.onDelete(index)}
+                            onDelete={this.onDelete}
                         />))}
                 </div>
             </div>
