@@ -4,8 +4,9 @@ describe("app", function () {
 
         cy.contains('Note Taker')
 
+        cy.get('.addNoteButton').trigger('mouseover')
         cy.contains('Create a New Note')
-        cy.get('.addNoteButton').click()
+        cy.get('.addNoteButton').click({ force: true })
         cy.get('.newNoteContainer .noteText input').type('Hello')
         cy.get('.newNoteContainer .noteText input').should('have.value', 'Hello')
         cy.get('.newNoteContainer .noteText input').type('{enter}')
