@@ -14,6 +14,7 @@
     border-right: none;
     border-left: none;
     width: 100%;
+    outline: none;
 }
 
 .noteItem {
@@ -22,4 +23,16 @@
     align-items: center;
     width: 100%;
     margin-top: 10px;
+}
+
+.newNote {
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-shadow: 2px 3px #001;
+    padding: 0px 10px 20px;
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
 }

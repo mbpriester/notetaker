@@ -9,12 +9,7 @@ const notesReducer = (state = { notes: []}, action) => {
         case 'DELETE_NOTE':
             return {
 
-                notes: //[...state.notes].slice(0,action.index).concat([...state.notes].slice(action.index+1,state.notes.length))
-                    state.notes.filter( note=> note !== state.notes[action.index]  )
-                // notes:  [
-                //     ...state.notes.slice(0, action.index),
-                //     ...state.notes.slice(action.index + 1)
-                // ]
+                notes: state.notes.filter(note => note !== state.notes[action.index])
             }
         default:
             return state

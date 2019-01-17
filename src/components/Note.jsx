@@ -4,9 +4,10 @@ import {Input} from "semantic-ui-react";
 import './Note.css'
 import {FiTrash2} from "react-icons/fi";
 
-const Note = ({note, index, onSubmit, onDelete}) => {
+const Note = ({note, index, onSubmit, onDelete, className}) => {
     return (
-        <div key={index} className='noteItem'>
+        <div key={index}
+             className={note ? 'noteItem' : className +' noteItem'}>
             {note ? <Input
                 className='noteText'
                 disabled={!!note}

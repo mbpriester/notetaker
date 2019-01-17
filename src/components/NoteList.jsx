@@ -1,7 +1,7 @@
 import React from 'react'
 import Note from "./Note";
 import {connect} from "react-redux";
-import {Button} from "semantic-ui-react";
+import {Button, Popup} from "semantic-ui-react";
 import {FiPlus} from "react-icons/fi";
 import {addNote, deleteNote} from "../actions";
 import './NoteList.css';
@@ -26,6 +26,9 @@ export class NoteList extends React.Component {
     }
 
     onSubmit(newNote) {
+        this.setState({
+            isHidden: true
+        })
         this.props.addNote(newNote)
     }
 
@@ -37,34 +40,47 @@ export class NoteList extends React.Component {
         const {notes} = this.props
         const {isHidden} = this.state
         return (
-            <div>
-                <h2 className='newNoteTitle'>Create a New Note</h2>
-                <Button
-                    className='addNoteButton'
-                    onClick={() => this.addNewNote()}>
-                    <FiPlus/>
-                </Button>
+            <div className='noteListContainer'>
                 <div className='newNoteContainer'>
                     {!isHidden &&
                     <Note
                         onSubmit={this.onSubmit}
-                        className={'newNoteItem'}/>}
+                        className='newNote'/>}
                 </div>
-                <div className='allNotesContainer'>
-                    <h2>Existing Notes</h2>
+                <Popup className='hoverLabel' trigger={
+                        <Button
+                            className='addNoteButton'
+                            onClick={() => this.addNewNote()}>
+                            <FiPlus/>
+                        </Button>}
+                       content={'Create a New Note'}
+                       style={styles}
+                       />
+                <div
+                    className={notes && notes.length > 0 ? 'allNotesContainer' : 'hidden'}>
                     {notes && notes.length > 0 &&
-                    (notes.map((note, index) =>
-                        <Note
-                            key={index}
-                            note={note}
-                            index={index}
-                            className={'existingNoteItem'}
-                            onDelete={this.onDelete}
-                        />))}
+                        <h3>Existing Notes</h3>}
+                    {notes && notes.length > 0 &&
+                        (notes.map((note, index) =>
+                            <Note
+                                key={index}
+                                note={note}
+                                index={index}
+                                className={'existingNoteItem'}
+                                onDelete={this.onDelete}
+                            />))
+                        }
                 </div>
             </div>
         )
     }
+}
+const styles = {
+    float: 'left',
+    textAlign: 'left',
+    marginBottom: '-30px',
+    right: '0',
+    paddingLeft: '60px'
 }
 
 const mapStateToProps = (state) => ({

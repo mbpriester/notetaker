@@ -8,12 +8,29 @@
     width: 50px;
     text-align: center;
     padding: 6px;
+    margin-top: 10px;
+    outline: none;
 }
 
-.newNoteContainer {
-
+.newNoteContainer, .allNotesContainer {
+    width: 100%;
 }
 
 .allNotesContainer {
+    border: 1px solid grey;
+    border-radius: 5px;
+    box-shadow: 2px 3px #001;
+    padding: 0px 10px 20px;
+    margin-top: 10px;
+}
 
+.hoverLabel {
+    color: white;
+    float: right;
+    text-align: right;
+    position: relative;
+}
+
+.noteListContainer {
+    width: 50%;
 }
